@@ -16,9 +16,10 @@ app.get('/login/github', (req, res) => {
 	)
 	console.log('Redirected')
 })
-// 2. Users are redirected back from GitHub with a code
-app.get('/authenticated:code', (req, res) => {
-	console.log(`Code: ${code}`)
+// 2. Users are redirected back from GitHub with a code used to get an access token
+app.get('/authenticated', (req, res) => {
+	code = req.query.code
+	res.send(`Code: ${code}`)
 })
 
 app.listen(port, () => {
