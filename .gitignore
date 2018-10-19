@@ -62,3 +62,6 @@ typings/
 
 # config.json that contains Application secrets
 config.json
+
+# ngrok.exe used for local dev testing
+ngrok.exe
