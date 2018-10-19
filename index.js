@@ -12,7 +12,9 @@ app.get('/login/github', (req, res) => {
 	console.log('Redirectig')
 	// 1. Users are redirected to request their GitHub identity
 	res.redirect(
-		`https://github.com/login/oauth/authorize?client_id=${config.client_id}`
+		`https://github.com/login/oauth/authorize?
+		client_id=${config.client_id}
+		&scope=${config.scope}`
 	)
 	console.log('Redirected')
 })
