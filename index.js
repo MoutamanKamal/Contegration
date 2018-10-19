@@ -1,9 +1,23 @@
 const express = require('express')
 const app = express()
+const fs = require('fs')
 const port = 3000
+const config = JSON.parse(fs.readFileSync('config.json'))
 
 app.get('/', (req, res) => {
 	res.send('Working')
+})
+
+app.get('/login/github', (req, res) => {
+	console.log('Redirectig')
+	// 1. Users are redirected to request their GitHub identity
+	res.redirect('https://github.com/login/oauth/authorize')
+	console.log('Redirected')
+})
+// 2. Users are redirected back to from GitHub
+// Param: code - used for
+app.get('/authenticated:code', (req, res) => {
+	console.log(`Code: ${code}`)
 })
 
 app.listen(port, () => {
