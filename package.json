@@ -1,0 +1,19 @@
+{
+  "name": "contegration",
+  "version": "1.0.0",
+  "description": "a hosted continuous integration and deployment system.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MoutamanKamal/Contegration.git"
+  },
+  "author": "Moutaman Kamal",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MoutamanKamal/Contegration/issues"
+  },
+  "homepage": "https://github.com/MoutamanKamal/Contegration#readme"
+}
