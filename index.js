@@ -14,8 +14,7 @@ app.get('/login/github', (req, res) => {
 	res.redirect('https://github.com/login/oauth/authorize')
 	console.log('Redirected')
 })
-// 2. Users are redirected back to from GitHub
-// Param: code - used for
+// 2. Users are redirected back from GitHub with a code
 app.get('/authenticated:code', (req, res) => {
 	console.log(`Code: ${code}`)
 })
