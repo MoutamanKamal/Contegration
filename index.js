@@ -38,7 +38,17 @@ app.get('/authenticated', (req, res) => {
 			// console.log(access_token)
 		})
 		.then(() => {
-			res.send('<h1>Access Token : ' + access_token + '</h1>')
+			options = {
+				headers: {
+					'User-Agent': 'My continuous integration server',
+					Authorization: `token ${access_token}`
+				},
+				url: `https://api.github.com/user/repos`
+			}
+			request.get(options).then((body, response, error) => {
+				// console.log(access_token)
+				res.send(body)
+			})
 		})
 })
 
