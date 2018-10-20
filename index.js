@@ -1,9 +1,10 @@
 const express = require('express')
 const app = express()
-const request = require('request')
+const request = require('request-promise-native')
 const fs = require('fs')
 const port = 3000
 const config = JSON.parse(fs.readFileSync('config.json'))
+let access_token
 
 app.get('/', (req, res) => {
 	res.send('Working')
@@ -19,20 +20,26 @@ app.get('/login/github', (req, res) => {
 	)
 	console.log('Redirected')
 })
+
 // 2. Users are redirected back from GitHub with a code used to get an access token
 app.get('/authenticated', (req, res) => {
 	code = req.query.code
 	options = {
-		url: `https://github.com/login/oauth/access_token?client_id=${
-			config.client_id
-		}&client_secret=${config.client_secret}&code=${code}`,
-		method: 'post',
-		headers: { Accept: 'application/json' }
+		headers: { Accept: 'application/json' },
+		url: 'https://github.com/login/oauth/access_token',
+		body: `client_id=${config.client_id}&client_secret=${
+			config.client_secret
+		}&code=${code}`
 	}
-	// res.send(`Code: ${code}`)
-	request(options).on('response', function(response) {
-		res.send(JSON.stringify(response))
-	})
+	request
+		.post(options)
+		.then((body, response, error) => {
+			access_token = JSON.parse(body).access_token
+			// console.log(access_token)
+		})
+		.then(() => {
+			res.send('<h1>Access Token : ' + access_token + '</h1>')
+		})
 })
 
 app.listen(port, () => {
